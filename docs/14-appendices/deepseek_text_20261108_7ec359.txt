@@ -1,0 +1,5 @@
+NexusAsset Cloud — Archived Draft (English Summary)
+
+Original filename: deepseek_text_20261108_7ec359.txt
+Status: Archived/historical draft. Mixed-language or raw source content was removed from product documentation.
+Use authoritative NexusAsset Cloud specifications in docs/, platform/, prompts/, and project-meta/.

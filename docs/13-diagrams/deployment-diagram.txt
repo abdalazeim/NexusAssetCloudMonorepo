@@ -1,0 +1,1 @@
+Ubuntu Server 24.04 LTS + Docker Compose + Traefik (nxa-traefik-public, nxa-le). Jenkins builds/scans images; Ansible deploys to staging/prod.

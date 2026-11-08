@@ -1,0 +1,1 @@
+Lansweeper change -> webhook/delta -> queue -> normalize/map/ownership/conflict -> CMDB upsert -> audit event -> notifications/reports.

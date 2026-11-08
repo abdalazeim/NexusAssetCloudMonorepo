@@ -1,0 +1,1 @@
+tenants 1-* users/tenant_members/assets/contracts/invoices/audit_events; assets 1-* asset_relations; contracts 1-* invoices 1-* invoice_lines; users 1-* device_tokens.

@@ -1,0 +1,1 @@
+Containers: nxa-frontend (Next.js), nxa-backend (Django/DRF), nxa-worker (Celery), nxa-db (PostgreSQL 16 RLS), nxa-redis (Redis 7), Traefik v3 edge, Prometheus/Grafana/Loki/OTel.

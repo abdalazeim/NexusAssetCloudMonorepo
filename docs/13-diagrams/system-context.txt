@@ -1,0 +1,5 @@
+NexusAsset Cloud System Context
+
+Users -> app.nexusasset.cloud (nxa-frontend/BFF) -> api.nexusasset.cloud (nxa-backend) -> nxa-db/nxa-redis
+nxa-worker -> Lansweeper GraphQL/Webhooks
+Providers: SMTP/FCM/APNs

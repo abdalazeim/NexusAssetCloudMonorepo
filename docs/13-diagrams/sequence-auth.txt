@@ -1,0 +1,1 @@
+User -> app.nexusasset.cloud BFF -> nxa-backend auth -> validate tenant/user -> issue JWT/refresh/session -> audit login.

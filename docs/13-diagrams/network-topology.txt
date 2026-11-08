@@ -1,0 +1,1 @@
+Internet -> Traefik (443, nxa-traefik-public) -> nxa-frontend/app.nexusasset.cloud, nxa-backend/api.nexusasset.cloud; internal -> nxa-db, nxa-redis, nxa-worker; monitoring network isolated.

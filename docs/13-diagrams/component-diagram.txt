@@ -1,0 +1,1 @@
+nxa-backend nxa_assets: interfaces -> application(CreateAssetUseCase) -> domain(AssetAggregate) <- infrastructure(DjangoAssetRepository, Mappers).

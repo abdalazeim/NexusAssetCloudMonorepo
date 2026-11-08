@@ -1,0 +1,1 @@
+Canonical root: backend/nexusasset, backend/apps/nxa_*, frontend, mobile/android, packages/@nexusasset/*, api/contracts/openapi.yaml, infrastructure/{traefik,docker,ansible,jenkins,monitoring}, tests, docs 00-14.

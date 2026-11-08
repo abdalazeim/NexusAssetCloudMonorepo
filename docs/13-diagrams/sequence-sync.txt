@@ -1,0 +1,1 @@
+Scheduler/Webhook -> nxa-worker -> Lansweeper Adapter -> Mapping/Ownership -> Asset Use Case -> nxa-db -> Audit/Event Bus.
