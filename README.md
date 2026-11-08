@@ -1,20 +1,18 @@
 <div align="center">
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ╔══════════════════════════════════════════════════════════════════════════════╗
-│ ║                                                                              ║
-│ ║      ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗ █████╗ ███████╗███████╗    ║
-│ ║      ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝██╔══██╗██╔════╝██╔════╝    ║
-│ ║      ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗███████║███████╗█████╗      ║
-│ ║      ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║██╔══██║╚════██║██╔══╝      ║
-│ ║      ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║██║  ██║███████║███████╗    ║
-│ ║      ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝    ║
-│ ║                                                                              ║
-│ ║                       N E X U S A S S E T   C L O U D                      ║
-│ ║                     "Where Discovery Meets Enterprise"                       ║
-│ ║                                                                              ║
-│ ╚══════════════════════════════════════════════════════════════════════════════╝
-└──────────────────────────────────────────────────────────────────────────────┘
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║      ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗ █████╗ ███████╗███████╗    ║
+║      ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝██╔══██╗██╔════╝██╔════╝    ║
+║      ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗███████║███████╗█████╗      ║
+║      ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║██╔══██║╚════██║██╔══╝      ║
+║      ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║██║  ██║███████║███████╗    ║
+║      ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝    ║
+║                                                                              ║
+║                       N E X U S A S S E T   C L O U D                      ║
+║                     "Where Discovery Meets Enterprise"                       ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
 | ◈ Type | ◈ Status | ◈ Version | ◈ License |
 |:---:|:---:|:---:|:---:|
@@ -26,48 +24,43 @@
 
 ## ◈ Project Snapshot
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ┌──────────────────────────────────────────────────────────────────────────────┐
-│ │  NexusAsset Cloud unifies Lansweeper asset discovery with Enterprise and    │
-│ │  Commercial operations to deliver:                                           │
-│ │                                                                              │
-│ │   [CMDB]  [ITAM]  [Governance]  [Audit]  [Billing]  [Multi-Tenancy]        │
-│ │   [BFF + Web]  [Mobile API]  [Observability]  [CI/CD + DevOps]             │
-│ └──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  NexusAsset Cloud unifies Lansweeper asset discovery with Enterprise and    │
+│  Commercial operations to deliver:                                           │
+│                                                                              │
+│   [CMDB]  [ITAM]  [Governance]  [Audit]  [Billing]  [Multi-Tenancy]        │
+│   [BFF + Web]  [Mobile API]  [Observability]  [CI/CD + DevOps]             │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
 ## ◈ Repository Geometry
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
 │ .                                   (root: README.md only)
-│ ├── README.md                       ◀ you are here
-│ ├── docs/                           Enterprise documentation (00..14)
-│ │   ├── 00-overview/  01-analysis/  02-design/  03-implementation/
-│ │   ├── 04-testing/   05-deployment/ 06-operations/ 07-security/
-│ │   ├── 08-mobile/    09-api/  10-design-system/ 11-governance/
-│ │   └── 12-adr/  13-diagrams/  14-appendices/
-│ ├── platform/                       Platform domains (spec/skeleton)
-│ │   ├── api/  backend/  frontend/  mobile/  packages/
-│ │   └── infrastructure/  tests/  scripts/
-│ ├── prompts/                        Executable phased prompt pack (00..13)
-│ ├── project-meta/                   Governance, policies, env/runtime descriptors
-│ └── archive/                        Historical source drafts
-└──────────────────────────────────────────────────────────────────────────────┘
+├── README.md                       ◀ you are here
+├── docs/                           Enterprise documentation (00..14)
+│   ├── 00-overview/  01-analysis/  02-design/  03-implementation/
+│   ├── 04-testing/   05-deployment/ 06-operations/ 07-security/
+│   ├── 08-mobile/    09-api/  10-design-system/ 11-governance/
+│   └── 12-adr/  13-diagrams/  14-appendices/
+├── platform/                       Platform domains (spec/skeleton)
+│   ├── api/  backend/  frontend/  mobile/  packages/
+│   └── infrastructure/  tests/  scripts/
+├── prompts/                        Executable phased prompt pack (00..13)
+├── project-meta/                   Governance, policies, env/runtime descriptors
+└── archive/                        Historical source drafts
 
 ---
 
 ## ◈ System Architecture (C4-Oriented View)
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│                          ┌─────────────────────────────────────┐
+                         ┌─────────────────────────────────────┐
 │                          │           USERS / CHANNELS          │
 │                          │  [Web Admin] [Manager] [Mobile] [API]│
 │                          └──────────────────┬──────────────────┘
 │                                             │ HTTPS
 │                                             ▼
-│                          ┌─────────────────────────────────────┐
+                         ┌─────────────────────────────────────┐
 │                          │      EDGE  ·  nxa-traefik-public     │
 │                          │   TLS (nxa-le) · routing · headers   │
 │                          └──────────────┬───────────┬──────────┘
@@ -75,7 +68,7 @@
 │                        app.nexusasset.cloud   api.nexusasset.cloud
 │                                         │           │
 │                                         ▼           ▼
-│                          ┌──────────────────┐ ┌──────────────────────────┐
+                         ┌──────────────────┐ ┌──────────────────────────┐
 │                          │  nxa-frontend    │ │      nxa-backend         │
 │                          │ Next.js 15 + BFF │ │  Django 5 + DRF (Clean)  │
 │                          │ React 19 / shadcn│ │  nxa_* bounded contexts  │
@@ -84,43 +77,40 @@
 │                                   └──────────────────►           │
 │                                                      SQL/RLS       │ async
 │                                                         ▼          ▼
-│                                               ┌────────────┐ ┌────────────┐
+                                              ┌────────────┐ ┌────────────┐
 │                                               │  nxa-db    │ │ nxa-redis  │
 │                                               │ PostgreSQL │ │   Redis 7  │
 │                                               │ 16 + RLS   │ │ cache/queue│
 │                                               └────────────┘ └─────┬──────┘
 │                                                                    ▼
-│                                                             ┌────────────┐
+                                                            ┌────────────┐
 │                                                             │ nxa-worker │
 │                                                             │   Celery   │
 │                                                             └─────┬──────┘
 │                                                      GraphQL/Webhooks/Delta
 │                                                                   ▼
-│                                                      ┌──────────────────────┐
+                                                     ┌──────────────────────┐
 │                                                      │  Lansweeper Platform │
 │                                                      └──────────────────────┘
-└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
 ## ◈ Clean Architecture Rule
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ┌──────────────────────────────────────────────────────────────────────────────┐
-│ │  DEPENDENCY DIRECTION  (inward only)                                         │
-│ │                                                                              │
-│ │   Interfaces  ───────▶  Application  ───────▶  Domain                        │
-│ │   (DRF/BFF/UI)         (Use Cases/DTO/Ports)  (Entities/Rules/Events)       │
-│ │                              ▲                                               │
-│ │                              │ implements                                    │
-│ │                        Infrastructure                                         │
-│ │                  (ORM, Lansweeper, Redis, Adapters)                          │
-│ │                                                                              │
-│ │   ✓ Domain has no Django/ORM/framework imports                               │
-│ │   ✓ OpenAPI 3.1 = API source of truth                                       │
-│ │   ✓ tenant_id + PostgreSQL RLS = isolation                                   │
-│ │   ✓ Lansweeper sync = idempotent + observable + Field Ownership Matrix       │
-│ └──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  DEPENDENCY DIRECTION  (inward only)                                         │
+│                                                                              │
+│   Interfaces  ───────▶  Application  ───────▶  Domain                        │
+│   (DRF/BFF/UI)         (Use Cases/DTO/Ports)  (Entities/Rules/Events)       │
+│                              ▲                                               │
+│                              │ implements                                    │
+│                        Infrastructure                                         │
+│                  (ORM, Lansweeper, Redis, Adapters)                          │
+│                                                                              │
+│   ✓ Domain has no Django/ORM/framework imports                               │
+│   ✓ OpenAPI 3.1 = API source of truth                                       │
+│   ✓ tenant_id + PostgreSQL RLS = isolation                                   │
+│   ✓ Lansweeper sync = idempotent + observable + Field Ownership Matrix       │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 ---
@@ -141,29 +131,26 @@
 
 ## ◈ Technology Stack
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ┌──────────────┬───────────────────────────────────────────────────────────────┐
-│ │ Layer        │ Target Technology                                             │
-│ ├──────────────┼───────────────────────────────────────────────────────────────┤
-│ │ Backend      │ Django 5 · DRF · Clean Architecture · DDD                     │
-│ │ Frontend     │ Next.js 15 (App Router) · React 19 · shadcn/ui · Tailwind    │
-│ │ API          │ REST · OpenAPI 3.1 · JWT · BFF                               │
-│ │ Data         │ PostgreSQL 16 · Streaming Replication · RLS                   │
-│ │ Async        │ Redis 7 · Celery · Celery Beat                                │
-│ │ Integration  │ Lansweeper GraphQL/Webhooks/Delta/Bulk · idempotent sync      │
-│ │ Edge         │ Traefik v3 · TLS · routing · rate limits · security headers   │
-│ │ Mobile       │ Android (Kotlin) · iOS (Swift) · API-consuming clients        │
-│ │ Delivery     │ Docker · Docker Compose · Jenkins LTS · Ansible               │
-│ │ Observability│ Prometheus · Grafana · Loki · OpenTelemetry                   │
-│ │ Security     │ OWASP controls · SAST/DAST/secrets/dependency scanning        │
-│ └──────────────┴───────────────────────────────────────────────────────────────┘
-└──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────┬───────────────────────────────────────────────────────────────┐
+│ Layer        │ Target Technology                                             │
+├──────────────┼───────────────────────────────────────────────────────────────┤
+│ Backend      │ Django 5 · DRF · Clean Architecture · DDD                     │
+│ Frontend     │ Next.js 15 (App Router) · React 19 · shadcn/ui · Tailwind    │
+│ API          │ REST · OpenAPI 3.1 · JWT · BFF                               │
+│ Data         │ PostgreSQL 16 · Streaming Replication · RLS                   │
+│ Async        │ Redis 7 · Celery · Celery Beat                                │
+│ Integration  │ Lansweeper GraphQL/Webhooks/Delta/Bulk · idempotent sync      │
+│ Edge         │ Traefik v3 · TLS · routing · rate limits · security headers   │
+│ Mobile       │ Android (Kotlin) · iOS (Swift) · API-consuming clients        │
+│ Delivery     │ Docker · Docker Compose · Jenkins LTS · Ansible               │
+│ Observability│ Prometheus · Grafana · Loki · OpenTelemetry                   │
+│ Security     │ OWASP controls · SAST/DAST/secrets/dependency scanning        │
+└──────────────┴───────────────────────────────────────────────────────────────┘
 
 ---
 
 ## ◈ Execution Path (How to Build)
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
 │   START
 │     │
 │     ▼
@@ -183,7 +170,6 @@
 │     │
 │     ▼
 │ Phase 13 Final Verification & Release  ──▶  GO / NO-GO
-└──────────────────────────────────────────────────────────────────────────────┘
 
 > Run each phase in a fresh session, verify before advancing, and do not treat CI/CD/production hardening as ready before local runtime verification passes.
 
@@ -191,13 +177,11 @@
 
 ## ◈ Quality Gates
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ┌──────────────────────────────────────────────────────────────────────────────┐
-│ │  REQUIRED GATES                                                              │
-│ │  [✓] Lint/Format      [✓] Type Checks      [✓] Architecture (Dependency Rule) │
-│ │  [✓] Unit Tests       [✓] Integration      [✓] Contract/OpenAPI Alignment     │
-│ │  [✓] Security Scans   [✓] Build/Package    [✓] Codegen Consistency           │
-│ └──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│  REQUIRED GATES                                                              │
+│  [✓] Lint/Format      [✓] Type Checks      [✓] Architecture (Dependency Rule) │
+│  [✓] Unit Tests       [✓] Integration      [✓] Contract/OpenAPI Alignment     │
+│  [✓] Security Scans   [✓] Build/Package    [✓] Codegen Consistency           │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 ---
@@ -228,14 +212,12 @@ This repository is presented as an **open-source, development-ready specificatio
 
 <div align="center">
 
-┌─ Specification Block (converted from `text`; scope 2 — no fenced code blocks) ─┐
-│ ┌──────────────────────────────────────────────────────────────────────────────┐
-│ │                                                                              │
-│ │                     This Script By: ☠αвɒ єℓαzєм☠                             │
-│ │                              Thanks For Usage :)                              │
-│ │                           Have A Nice Day,GoodBye :)                          │
-│ │                                                                              │
-│ └──────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│                     This Script By: ☠αвɒ єℓαzєм☠                             │
+│                              Thanks For Usage :)                              │
+│                           Have A Nice Day,GoodBye :)                          │
+│                                                                              │
 └──────────────────────────────────────────────────────────────────────────────┘
 
 </div>

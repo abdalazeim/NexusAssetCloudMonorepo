@@ -1,11 +1,10 @@
 <div align="center">
 
 ┌─ Specification Block (converted from 	ext; scope 2 — no fenced code blocks) ─┐
-│ ╔══════════════════════════════════════════════════════════════════════════════╗
-│ ║        NEXUSASSET CLOUD v1.0.0 — CURRENT-STATE EVALUATION                  ║
-│ ║           No Implementation / No Executable Code / No Runtime Claims         ║
-│ ╚══════════════════════════════════════════════════════════════════════════════╝
-└──────────────────────────────────────────────────────────────────────────────┘
+╔══════════════════════════════════════════════════════════════════════════════╗
+║        NEXUSASSET CLOUD v1.0.0 — CURRENT-STATE EVALUATION                  ║
+║           No Implementation / No Executable Code / No Runtime Claims         ║
+╚══════════════════════════════════════════════════════════════════════════════╝
 
 | ◈ Date (UTC) | ◈ Scope | ◈ Basis | ◈ Verdict |
 |:---:|:---|:---|:---:|
@@ -23,7 +22,6 @@
 │  NO runtime or CI execution claimed.                                         │
 │  Evaluation basis: documentation, specifications, descriptions, prompts,     │
 │  governance metadata.                                                        │
-└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
@@ -43,7 +41,6 @@
 │ Verified checks: ARABIC=0 · EMPTY=0 · MD_FENCE_HITS=0 · TODO_LIKE=0           │
 │ (outside archive/). Standalone code/config converted to *.description.md       │
 │ (Scope 1); Markdown fenced blocks converted (Scope 2).                         │
-└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
@@ -98,7 +95,6 @@
 │  [ ] Checkpoint 3: Approve security baseline (RBAC, RLS, secrets, scanning)    │
 │  [ ] Checkpoint 4: Approve local runtime acceptance (Docker/Traefik/health)    │
 │  [ ] Checkpoint 5: Approve CI quality/security gates before production work    │
-└──────────────────────────────────────────────────────────────────────────────┘
 
 ---
 
@@ -109,6 +105,5 @@
 │  Suitable for planning and controlled implementation kickoff.                │
 │  NOT suitable to be presented as an implemented, tested, secure, or          │
 │  production-ready system.                                                    │
-└──────────────────────────────────────────────────────────────────────────────┘
 
 > NexusAsset Cloud is currently a strong, clean, specification-first blueprint; its value now depends on disciplined MVP implementation with verifiable contracts, security controls, and runtime evidence.
