@@ -1,70 +1,65 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 00-overview/README.md                         │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 00-overview                                   │
-│  Version     : 1.0.0                                         │
-│  Status      : Stable                                        │
-│  Owner       : Product & Architecture                        │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Product Vision, Scope, and Navigation
 
-╔════════════════════════════════════════════════════════════════╗
-║  OVERVIEW                                                      ║
-║  Product Vision, Scope, and Navigation                         ║
-╚════════════════════════════════════════════════════════════════╝
-
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Contents](#2-contents)
-3. [Reading Order](#3-reading-order)
-4. [Related Files](#4-related-files)
-
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-This module provides the product-level understanding of NexusAsset Cloud: why it exists, what it delivers, how users navigate it, and which terms the team uses consistently.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Contents                                             │
-└──────────────────────────────────────────────────────────┘
-| File | Description |
+## Current State and Evidence
+| Field | Value |
 |---|---|
-| [01-vision.md](./01-vision.md) | Strategic vision, outcomes, principles, and success metrics |
-| [02-product-overview.md](./02-product-overview.md) | Product capabilities, stack, and key differentiators |
-| [03-glossary.md](./03-glossary.md) | Core product and technical terms |
-| [04-navigation-map.md](./04-navigation-map.md) | Module/menu/navigation structure |
+| Status | Expanded baseline (Phase B/C) |
+| Evidence level | Descriptor/design evidence + target intent; business metrics and production usage are Unverified |
+| Primary evidence | Root `README.md`, `docs/00-overview/*`, `docs/01-analysis/*`, `docs/02-design/*`, `prompts/README.md` |
 
-┌──────────────────────────────────────────────────────────┐
-│  3. Reading Order                                        │
-└──────────────────────────────────────────────────────────┘
-1. `01-vision.md`
-2. `02-product-overview.md`
-3. `03-glossary.md`
-4. `04-navigation-map.md`
+## Purpose
+Provide a shared, professional understanding of NexusAsset Cloud: why the platform exists, which business and technical problems it addresses, what capabilities it targets, and how readers navigate the documentation set.
 
-┌──────────────────────────────────────────────────────────┐
-│  4. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [../README.md](../README.md)
-- [../01-analysis/README.md](../01-analysis/README.md)
-- [../02-design/README.md](../02-design/README.md)
+## Project Identity
+| Attribute | Value |
+|---|---|
+| Product | NexusAsset Cloud |
+| Tagline | "Where Discovery Meets Enterprise" |
+| Domain | Enterprise SaaS / ITAM / CMDB / governance / commercial operations |
+| Current repository state | Specification and execution foundation (not a verified running production system) |
+| Canonical naming | `nxa_*` contexts, `nxa-*` services, `@nexusasset/*` packages, `NXA_*` secrets, `*.nexusasset.cloud` domains |
 
+## Problem Space (Target)
+Organizations often discover technical assets through tools such as Lansweeper but struggle to convert discovery data into trusted operational, governance, and commercial decisions. NexusAsset Cloud targets this gap by unifying discovery with CMDB/ITAM workflows, tenant-safe data governance, auditability, and business context.
 
+## Target Outcomes
+| Outcome | Business value | Technical implication | Status |
+|---|---|---|---|
+| Unified asset visibility | Better decisions across IT, security, and finance | CMDB/asset model, integration ingestion, relationships | Target |
+| Trusted tenant isolation | SaaS/compliance confidence | `tenant_id`, authorization, PostgreSQL RLS, negative tests | Target |
+| Reliable Lansweeper synchronization | Accurate inventory with less manual effort | Idempotent sync, webhooks/delta/bulk, Field Ownership Matrix | Target |
+| Auditable operations | Compliance and incident investigation support | Audit events, structured logs, access controls | Target |
+| Governed delivery | Lower change risk | OpenAPI-first, CI gates, ADRs, runbooks | Target |
 
-┌──────────────────────────────────────────────────────────┐
-│  Adapted Source: 09_Developer_Practices/04_Documenting_Any_Software_System.txt│
-└──────────────────────────────────────────────────────────┘
-▸ Distributed from Fundamentals reference library (rewritten for NexusAsset Cloud)
-- ═══════════════════════════════════════════════════════════════════
-- ───────────────────────────────────────────────────────────────────
+## Scope Boundaries
+### In-scope (target)
+- Discovery integration and normalized asset/CMDB data.
+- Tenant-aware asset, identity, audit, notification, and billing contexts as defined.
+- Web/BFF, API, async workers, and mobile API consumption.
+- Security, observability, testing, deployment, and operations documentation/processes.
 
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ Apply these practices with NexusAsset Cloud standards:      │
-│ Clean Architecture, `nxa_*` contexts, OpenAPI 3.1,          │
-│ `tenant_id` + PostgreSQL RLS, and security quality gates.   │
-╰─────────────────────────────────────────────────────────────╯
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+### Out-of-scope / not claimed as implemented now
+- Verified production runtime, complete UI, complete OpenAPI surface, executed CI/CD, or production compliance certification.
+- Any endpoint, table, job, dashboard, control, or workflow not backed by descriptor/design evidence must be treated as Target/Planned/Unverified.
+
+## Contents
+| File | Description | Expansion note |
+|---|---|---|
+| `01-vision.md` | Strategic vision, outcomes, principles, metrics | Expand metrics with measurable status labels. |
+| `02-product-overview.md` | Capabilities, stack, differentiators | Reconcile target stack with current-state evidence. |
+| `03-glossary.md` | Core terms | Add bounded-context, security, sync, and API terms. |
+| `04-navigation-map.md` | Module/menu/navigation structure | Mark conceptual vs implemented navigation. |
+
+## Reading Order
+1. `README.md` (root) for repository state and entry points.
+2. `00-overview/01-vision.md` and `02-product-overview.md`.
+3. `01-analysis/` for requirements and domain.
+4. `02-design/` and `12-adr/` for architecture decisions.
+5. `03-implementation/`, `09-api/`, `07-security/`, `04-testing/`, `05-deployment/`, `06-operations/` for delivery standards.
+6. `prompts/README.md` for phased execution.
+
+## Related Files
+- `../README.md`
+- `../01-analysis/README.md`
+- `../02-design/README.md`
+- `../../prompts/README.md`

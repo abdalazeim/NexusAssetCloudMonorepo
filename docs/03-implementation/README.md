@@ -1,65 +1,51 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 03-implementation/README.md                   │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 03-implementation                             │
-│  Version     : 1.0.0                                         │
-│  Status      : Stable                                        │
-│  Owner       : Platform Architecture                         │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Project Structure, Standards, and Engineering Patterns
 
-╔════════════════════════════════════════════════════════════════╗
-║  IMPLEMENTATION                                                ║
-║  Project Structure, Standards, and Engineering Patterns        ║
-╚════════════════════════════════════════════════════════════════╝
-
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Contents](#2-contents)
-3. [Implementation Rules](#3-implementation-rules)
-4. [Related Files](#4-related-files)
-
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-This module defines how NexusAsset Cloud code is organized and implemented. It translates architecture decisions into enforceable repository structure, coding conventions, and implementation patterns.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Contents                                             │
-└──────────────────────────────────────────────────────────┘
-| File | Description |
+## Current State and Evidence
+| Field | Value |
 |---|---|
-| [01-project-structure.md](./01-project-structure.md) | Canonical monorepo and backend app layout |
-| [02-naming-conventions.md](./02-naming-conventions.md) | Naming standards across code, APIs, infra, and docs |
-| [03-solid-principles.md](./03-solid-principles.md) | SOLID (Single responsibility, Open/closed, Liskov substitution, Interface segregation, Dependency inversion) application |
-| [04-clean-code.md](./04-clean-code.md) | Readability, maintainability, and code hygiene |
-| [05-dependency-rule.md](./05-dependency-rule.md) | Dependency direction and enforcement |
-| [06-use-case-pattern.md](./06-use-case-pattern.md) | Application use-case implementation pattern |
-| [07-repository-pattern.md](./07-repository-pattern.md) | Ports, repositories, and persistence boundaries |
-| [08-mappers.md](./08-mappers.md) | Domain/DTO/ORM mapping rules |
-| [09-migrations-strategy.md](./09-migrations-strategy.md) | Expand/Contract database migrations |
-| [10-error-handling.md](./10-error-handling.md) | Domain/application/API error mapping |
-| [11-transactions.md](./11-transactions.md) | Unit of Work and transactional boundaries |
-| [12-feature-flags.md](./12-feature-flags.md) | Feature flag lifecycle and governance |
+| Status | Expanded baseline (Phase B/C) |
+| Evidence level | Structure/standards documented; implementation patterns are Target/Descriptor unless code is verified |
+| Primary evidence | `docs/03-implementation/*`, `platform/**` descriptors, `project-meta/*` descriptors, `prompts/*` |
 
-┌──────────────────────────────────────────────────────────┐
-│  3. Implementation Rules                                 │
-└──────────────────────────────────────────────────────────┘
-- Keep Domain independent from frameworks.
-- Use `nxa_*` bounded-context apps under `backend/apps/`.
-- Use `nxa-*` service/container names in infrastructure.
-- Treat `api/contracts/openapi.yaml` as the single source of truth.
-- Enforce tenant isolation and architecture rules in CI.
+## Purpose
+Translate NexusAsset Cloud architecture into enforceable engineering standards: repository structure, naming, layer responsibilities, coding patterns, migrations, error handling, transactions, and feature-flag governance.
 
-┌──────────────────────────────────────────────────────────┐
-│  4. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [../02-design/04-clean-architecture.md](../02-design/04-clean-architecture.md)
-- [../04-testing/09-architecture-testing.md](../04-testing/09-architecture-testing.md)
-- [../11-governance/01-git-workflow.md](../11-governance/01-git-workflow.md)
+## Current State vs Target State
+The repository currently contains target structures and descriptor artifacts under `platform/`. Engineering standards in this module apply to future/ongoing implementation and must be used when regenerating executable artifacts from descriptors.
 
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Implementation Rules (Mandatory)
+- Keep Domain independent from frameworks and infrastructure concerns.
+- Use `nxa_*` bounded-context packages under the backend app structure.
+- Use canonical `nxa-*` service/container names in infrastructure.
+- Treat OpenAPI 3.1 as the source of truth (target); current descriptor: `platform/api/contracts/openapi.yaml.description.md` (current descriptor; target contract path: `api/contracts/openapi` + YAML).
+- Use `NXA_*` for environment/secret keys; never commit real secrets.
+- Enforce tenant isolation and dependency rules in code review and CI (target gates).
+
+## Bounded-Context Internal Pattern (Target)
+| Layer | Contains | Must not contain |
+|---|---|---|
+| `domain` | Entities, value objects, domain services, domain events/rules | Django/DRF/ORM imports, HTTP/Redis/Celery specifics |
+| `application` | Use cases, DTOs, ports, orchestration | Framework persistence details, transport-specific concerns |
+| `infrastructure` | ORM models/migrations adapters, repositories, external clients, mappers | Business rule ownership |
+| `interfaces` | API views/serializers/controllers, task handlers, command adapters | Core business decisions that belong in domain/application |
+
+## Contents
+| File | Description | Expansion note |
+|---|---|---|
+| `01-project-structure.md` | Canonical monorepo and backend layout | Keep reconciled with current `platform/` + target paths. |
+| `02-naming-conventions.md` | Naming standards | Add examples and anti-patterns. |
+| `03-solid-principles.md` | SOLID application | Map to NexusAsset Cloud examples/status labels. |
+| `04-clean-code.md` | Readability/maintainability | Add review checklist. |
+| `05-dependency-rule.md` | Dependency direction and enforcement | Add import-linter/CI target checks. |
+| `06-use-case-pattern.md` | Use-case pattern | Add input/output/error/transaction expectations. |
+| `07-repository-pattern.md` | Ports/repositories/persistence boundaries | Add tenant and mapping rules. |
+| `08-mappers.md` | Domain/DTO/ORM mapping | Add field ownership/sensitive-field rules. |
+| `09-migrations-strategy.md` | Expand/Contract migrations | Add RLS/multi-tenant migration cautions. |
+| `10-error-handling.md` | Error mapping | Add domain/application/API/observability mapping. |
+| `11-transactions.md` | Unit of Work/transaction boundaries | Add idempotency and async boundaries. |
+| `12-feature-flags.md` | Feature flag lifecycle | Add rollout, cleanup, and audit considerations. |
+
+## Related Files
+- `../02-design/04-clean-architecture.md`
+- `../04-testing/09-architecture-testing.md`
+- `../documentation-audit/STATUS_TAXONOMY.md`

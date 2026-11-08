@@ -1,59 +1,59 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 07-security/03-secrets-management.md         │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 07-security                                  │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                         │
-│  Owner       : Security Engineering                         │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Secrets Management and Rotation
 
-╔════════════════════════════════════════════════════════════════╗
-║  03 SECRETS MANAGEMENT                                         ║
-║  Security controls and compliance                              ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+| Field | Value |
+|---|---|
+| Status | Expanded baseline |
+| Evidence level | Implemented (Descriptor Evidence) for `NXA_*` naming/template intent; runtime secret-store integration Unverified |
+| Primary evidence | `project-meta/.env.example.description.md`, `project-meta/.gitignore.description.md`, `project-meta/SECURITY.md`, `prompts/10-security-and-compliance.md` |
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Standard](#2-standard)
-3. [Controls and Checklist](#3-controls-and-checklist)
-4. [Related Files](#4-related-files)
+## Purpose
+Define how NexusAsset Cloud names, stores, accesses, rotates, audits, and protects secrets and sensitive configuration values.
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-Define the NexusAsset Cloud standard for **03 secrets management**.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Standard                                             │
-└──────────────────────────────────────────────────────────┘
-Apply NexusAsset Cloud canonical naming and boundaries:
-- `nexusasset-cloud/`, `backend/nexusasset/`, `backend/apps/nxa_*`
-- `nxa-backend`, `nxa-frontend`, `nxa-worker`, `nxa-db`, `nxa-redis`
-- `app.nexusasset.cloud`, `api.nexusasset.cloud`, `nxa-traefik-public`, `nxa-le`
-- `@nexusasset/*` packages and `NXA_*` secrets
-- OpenAPI 3.1 source of truth, tenant isolation (`tenant_id` + PostgreSQL RLS), Clean Architecture, idempotent integrations
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Controls and Checklist                               │
-└──────────────────────────────────────────────────────────┘
-| Control | Status | Evidence |
+## Secret Classes
+| Class | Examples | Risk |
 |---|---|---|
-| Canonical naming applied | ○ In Progress | PR/docs review |
-| Security and tenant isolation addressed | ○ In Progress | Tests/policies |
-| CI/CD or operational gate defined | ○ In Progress | Pipeline/runbook |
-| Related ADRs/docs linked | ○ In Progress | Document links |
+| Application secrets | `NXA_SECRET_KEY`, JWT/signing keys | Critical |
+| Data credentials | PostgreSQL/Redis credentials/URLs | Critical |
+| Integration secrets | `NXA_LANSWEEPER_TOKEN`, webhook secrets | Critical |
+| Delivery secrets | CI credentials, registry tokens, Ansible/Vault secrets | Critical |
+| Observability/access | API keys/tokens for telemetry or admin systems | High |
 
-┌──────────────────────────────────────────────────────────┐
-│  4. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [README.md](./README.md)
-- [../00-overview/README.md](../00-overview/README.md)
-- [../03-implementation/01-project-structure.md](../03-implementation/01-project-structure.md)
-- [../12-adr/README.md](../12-adr/README.md)
+## Mandatory Rules
+1. Use `NXA_*` naming for NexusAsset Cloud environment/secret keys.
+2. Never commit real secrets, private keys, tokens, or production credentials.
+3. Never print secrets in logs, stack traces, CI output, or client responses.
+4. Use least privilege and scope credentials to the minimum required tenant/system/action.
+5. Rotate secrets on compromise suspicion, personnel/process events (as policy requires), and scheduled intervals for critical credentials.
+6. Separate local development templates (`.env.example` descriptor intent) from real secret stores.
 
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Lifecycle
+| Stage | Control (Target) | Status |
+|---|---|---|
+| Create | Generate strong secret in approved manager; record owner/purpose | Unverified |
+| Store | Secret store/Vault/CI credential store; encrypted at rest | Unverified |
+| Access | Runtime injection; least-privilege identities/services | Unverified |
+| Use | Masked logs; scoped usage; timeout/retry safety | Unverified |
+| Rotate | Planned rotation + emergency rotation runbook | Unverified |
+| Revoke | Immediate invalidation on leak/compromise | Unverified |
+| Audit | Access/change events where supported | Unverified |
+
+## Rotation Priorities (Target)
+| Secret | Trigger examples | Special care |
+|---|---|---|
+| Lansweeper token/webhook secret | Leak, staff/process change, suspected abuse | Coordinate sync/webhook verification to avoid outage; verify idempotent retries |
+| JWT/signing keys | Policy schedule, compromise | Support safe rollover if multiple keys/alg strategy implemented |
+| DB credentials | Compromise, rotation schedule | Coordinate migrations/workers; avoid downtime |
+| CI/deploy credentials | Leak, runner compromise, scope change | Revoke quickly; review pipeline history |
+
+## Evidence Requirements
+- Secret scanning configuration/results.
+- `.gitignore`/repository hygiene controls.
+- Secret-store integration docs/config references (when implemented).
+- Rotation runbook and incident response linkage.
+
+## Related Files
+- `01-threat-model.md`
+- `../06-operations/08-incident-response.md`
+- `../../project-meta/.env.example.description.md`
+- `../../project-meta/.gitignore.description.md`

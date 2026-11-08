@@ -37,7 +37,7 @@ This document defines the canonical repository structure for NexusAsset Cloud. I
 - **Monorepo coherence:** Keep API contract, clients, services, and infrastructure aligned.
 - **Bounded contexts:** Implement business domains as explicit backend apps (`nxa_*`).
 - **Clean Architecture:** Keep `domain`, `application`, `infrastructure`, and `interfaces` separated inside each app.
-- **Single source of truth:** Maintain OpenAPI in `api/contracts/openapi.yaml`.
+- **Single source of truth:** Maintain OpenAPI in `platform/api/contracts/openapi.yaml.description.md` (current descriptor; target contract path: `api/contracts/openapi` + YAML).
 - **Operational realism:** Store deployable infrastructure as code under `infrastructure/`.
 
 ┌──────────────────────────────────────────────────────────┐
@@ -73,7 +73,7 @@ This document defines the canonical repository structure for NexusAsset Cloud. I
 │ │   ├── ui/
 │ │   ├── eslint-config/
 │ │   └── tsconfig/
-│ ├── api/contracts/openapi.yaml          # OpenAPI 3.1 contract
+│   └── contracts/openapi.yaml.description.md  # OpenAPI 3.1 contract descriptor (target contract path: `api/contracts/openapi` + YAML)
 │ ├── infrastructure/
 │ │   ├── traefik/                        # nxa-traefik-public, nxa-le, TLS, middleware
 │ │   ├── docker/                         # nxa-backend, nxa-frontend, nxa-worker, nxa-db, nxa-redis
@@ -154,7 +154,7 @@ This document defines the canonical repository structure for NexusAsset Cloud. I
 - `✓` Every bounded context contains `domain/application/infrastructure/interfaces/tests`.
 - `✓` The Django project package is `backend/nexusasset/`.
 - `✓` Service names use `nxa-*` in Docker/infrastructure.
-- `✓` OpenAPI contract exists at `api/contracts/openapi.yaml`.
+- `✓` OpenAPI contract exists at `platform/api/contracts/openapi.yaml.description.md` (current descriptor; target contract path: `api/contracts/openapi` + YAML).
 - `○` Folder READMEs are created for complex areas.
 - `○` Legacy draft files are archived or removed after migration.
 
