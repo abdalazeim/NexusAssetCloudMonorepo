@@ -1,53 +1,20 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 12-adr/README.md                             │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 12-adr                                       │
-│  Version     : 1.0.0                                        │
-│  Status      : Stable                                       │
-│  Owner       : Platform Engineering                          │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Architecture Decision Records (ADRs)
 
-╔════════════════════════════════════════════════════════════════╗
-║  ARCHITECTURE DECISION RECORDS                                 ║
-║  Key Architectural Decisions                                   ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Contents](#2-contents)
-3. [Related Files](#3-related-files)
+## Status
+Expanded baseline. ADR files exist; each ADR should be reviewed for complete context, decision, alternatives, consequences, status, and evidence/implementation notes.
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-This module contains NexusAsset Cloud documentation for **key architectural decisions**.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Contents                                             │
-└──────────────────────────────────────────────────────────┘
-| File | Description |
+## ADR Standard
+| Field | Requirement |
 |---|---|
-| [0001-use-clean-architecture.md](0001-use-clean-architecture.md) | Use Clean Architecture and DDD boundaries |
-| [0002-adopt-nextjs-app-router.md](0002-adopt-nextjs-app-router.md) | Adopt Next.js 15 App Router |
-| [0003-use-traefik-instead-of-nginx.md](0003-use-traefik-instead-of-nginx.md) | Use Traefik v3 as edge proxy |
-| [0004-bff-pattern.md](0004-bff-pattern.md) | Use BFF for web authentication and aggregation |
-| [0005-openapi-first-codegen.md](0005-openapi-first-codegen.md) | Use OpenAPI-first contract and code generation |
-| [0006-shadcn-ui.md](0006-shadcn-ui.md) | Use shadcn/ui and Tailwind for web UI primitives |
-| [0007-lansweeper-hybrid-sync.md](0007-lansweeper-hybrid-sync.md) | Use hybrid Lansweeper sync with field ownership |
-| [0008-multi-tenancy-strategy.md](0008-multi-tenancy-strategy.md) | Use shared schema with tenant_id and PostgreSQL RLS |
-| [0009-event-driven-architecture.md](0009-event-driven-architecture.md) | Use lightweight domain events and async workers |
-| [0010-jenkins-over-gitlab-ci.md](0010-jenkins-over-gitlab-ci.md) | Use Jenkins LTS for CI/CD orchestration |
+| Status | Proposed/Accepted/Superseded/Deprecated |
+| Context | Problem, constraints, forces |
+| Decision | Clear choice |
+| Alternatives | Considered options and trade-offs |
+| Consequences | Positive/negative impacts, risks, follow-ups |
+| Evidence | Links to docs/code/descriptors/tests when available |
 
-┌──────────────────────────────────────────────────────────┐
-│  3. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [../README.md](../README.md)
-- [../00-overview/README.md](../00-overview/README.md)
-- [../03-implementation/README.md](../03-implementation/README.md)
-
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Current ADR Topics (Repository)
+Clean Architecture, Next.js App Router, Traefik, BFF, OpenAPI-first/codegen, Lansweeper hybrid sync, multi-tenancy strategy, event-driven approach, Jenkins (and related listed files). Verify file-by-file consistency.

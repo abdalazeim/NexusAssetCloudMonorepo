@@ -1,85 +1,25 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 02-design/04-clean-architecture.md           │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 02-design                                    │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Platform Engineering                          │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Clean Architecture and Dependency Rules
 
-╔════════════════════════════════════════════════════════════════╗
-║  CLEAN ARCHITECTURE                                            ║
-║  Domain, Application, Infrastructure, Interfaces               ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Layers](#1-layers)
-2. [Dependency Rule](#2-dependency-rule)
-3. [Ports and Adapters](#3-ports-and-adapters)
-4. [Composition Root](#4-composition-root)
-5. [Enforcement](#5-enforcement)
-6. [Related Files](#6-related-files)
+## Purpose
+Ensure NexusAsset Cloud business rules remain testable and independent from frameworks, UI, databases, and external integrations.
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Layers                                                │
-└──────────────────────────────────────────────────────────┘
+## Dependency Rule
+| Layer | May depend on | Must not depend on |
+|---|---|---|
+| Domain | Standard language/library primitives as approved; domain-only abstractions | Django/DRF/ORM/HTTP/Celery/UI/external SDKs |
+| Application | Domain, ports/interfaces, DTOs | Concrete ORM/web/framework details |
+| Infrastructure | Application ports, domain models as needed for mapping, frameworks/SDKs | Owning business rules |
+| Interfaces | Application/use cases, DTOs/schemas | Direct domain persistence shortcuts that bypass application rules |
 
-▸ Layers
-Document the canonical NexusAsset Cloud standard for **layers** in this file. Align naming (`nxa-*`, `@nexusasset/*`, `nexusasset.cloud`, `NXA_*`), Clean Architecture boundaries, tenant isolation, and OpenAPI-first contracts.
+## Enforcement (Target)
+- Import-linter/architecture tests in CI.
+- Code review checklist for new modules/endpoints/jobs.
+- ADR required for approved exceptions.
 
-┌──────────────────────────────────────────────────────────┐
-│  2. Dependency Rule                                       │
-└──────────────────────────────────────────────────────────┘
-
-▸ Dependency Rule
-Document the canonical NexusAsset Cloud standard for **dependency rule** in this file. Align naming (`nxa-*`, `@nexusasset/*`, `nexusasset.cloud`, `NXA_*`), Clean Architecture boundaries, tenant isolation, and OpenAPI-first contracts.
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Ports and Adapters                                    │
-└──────────────────────────────────────────────────────────┘
-
-▸ Ports and Adapters
-Document the canonical NexusAsset Cloud standard for **ports and adapters** in this file. Align naming (`nxa-*`, `@nexusasset/*`, `nexusasset.cloud`, `NXA_*`), Clean Architecture boundaries, tenant isolation, and OpenAPI-first contracts.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Composition Root                                      │
-└──────────────────────────────────────────────────────────┘
-
-▸ Composition Root
-Document the canonical NexusAsset Cloud standard for **composition root** in this file. Align naming (`nxa-*`, `@nexusasset/*`, `nexusasset.cloud`, `NXA_*`), Clean Architecture boundaries, tenant isolation, and OpenAPI-first contracts.
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Enforcement                                           │
-└──────────────────────────────────────────────────────────┘
-
-▸ Enforcement
-Document the canonical NexusAsset Cloud standard for **enforcement** in this file. Align naming (`nxa-*`, `@nexusasset/*`, `nexusasset.cloud`, `NXA_*`), Clean Architecture boundaries, tenant isolation, and OpenAPI-first contracts.
-
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                     │
-└──────────────────────────────────────────────────────────┘
-- [../03-implementation/05-dependency-rule.md](../03-implementation/05-dependency-rule.md)
-- [../04-testing/09-architecture-testing.md](../04-testing/09-architecture-testing.md)
-- [../12-adr/0001-use-clean-architecture.md](../12-adr/0001-use-clean-architecture.md)
-
-
-
-┌──────────────────────────────────────────────────────────┐
-│  Adapted Source: 02_Architecture_and_Design/01_Architecture_Patterns.txt│
-└──────────────────────────────────────────────────────────┘
-▸ Distributed from Fundamentals reference library (rewritten for NexusAsset Cloud)
-- ═══════════════════════════════════════════════════════
-- ───────────────────────────────────────────────────────
-- ────────────────────────────────────────
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ Apply these practices with NexusAsset Cloud standards:      │
-│ Clean Architecture, `nxa_*` contexts, OpenAPI 3.1,          │
-│ `tenant_id` + PostgreSQL RLS, and security quality gates.   │
-╰─────────────────────────────────────────────────────────────╯
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## NexusAsset Cloud Application
+- All backend bounded contexts follow `domain/application/infrastructure/interfaces` separation.
+- Lansweeper API client is infrastructure; sync decision logic (mapping precedence, field ownership, conflict policy) belongs in domain/application policy.
+- Tenant and authorization checks are enforced server-side in application/interface/data layers.

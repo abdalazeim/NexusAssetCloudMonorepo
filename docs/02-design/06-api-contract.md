@@ -1,81 +1,21 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 02-design/06-api-contract.md                 │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 02-design                                    │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Architecture                                 │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — OpenAPI Contract and API Standards
 
-╔════════════════════════════════════════════════════════════════╗
-║  API CONTRACT                                                  ║
-║  OpenAPI 3.1 Contract and Governance                           ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Scope](#2-scope)
-3. [Standard](#3-standard)
-4. [Implementation Guidance](#4-implementation-guidance)
-5. [Validation](#5-validation)
-6. [Related Files](#6-related-files)
+## Status
+Target/Descriptor Evidence. Current descriptor: `platform/api/contracts/openapi.yaml.description.md` (skeleton; target contract path `api/contracts/openapi` + YAML).
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                               │
-└──────────────────────────────────────────────────────────┘
+## API Standards (Target)
+- OpenAPI 3.1 source of truth.
+- Consistent resource naming, operation IDs, tags, and bounded-context alignment.
+- Explicit auth requirements and tenant scoping rules.
+- Standard pagination/filter/sort and error envelope.
+- Idempotency for create/sync/trigger operations prone to retries.
+- Backward-compatible evolution where possible; deprecation/versioning for breaking changes.
 
-Define the NexusAsset Cloud standard for openapi 3.1 contract and governance.
+## BFF vs Public/Internal API
+BFF endpoints may tailor responses for web UX but must not bypass backend authorization, tenant isolation, or contract discipline. Public/mobile contracts must be documented and governed.
 
-┌──────────────────────────────────────────────────────────┐
-│  2. Scope                                                 │
-└──────────────────────────────────────────────────────────┘
-
-This document applies to the NexusAsset Cloud monorepo, delivery pipelines, and runtime environments unless a more specific approved document states otherwise.
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Standard                                              │
-└──────────────────────────────────────────────────────────┘
-
-Use NexusAsset Cloud canonical naming: repository `nexusasset-cloud/`, Django package `backend/nexusasset/`, apps `nxa_*`, services `nxa-backend/nxa-frontend/nxa-worker/nxa-db/nxa-redis`, edge `nxa-traefik-public` and `nxa-le`, domains `app.nexusasset.cloud` and `api.nexusasset.cloud`, packages `@nexusasset/*`, and secrets `NXA_*`.
-
-Enforce Clean Architecture, tenant isolation (`tenant_id` + PostgreSQL RLS), idempotent integrations, and OpenAPI 3.1 as the contract source of truth.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Implementation Guidance                               │
-└──────────────────────────────────────────────────────────┘
-
-▸ Requirements
-- Use active, testable, and reviewable controls for api contract.
-- Align implementation with bounded contexts (`nxa_core`, `nxa_accounts`, `nxa_tenants`, `nxa_assets`, `nxa_lansweeper`, `nxa_billing`, `nxa_notifications`, `nxa_audit`).
-- Document exceptions through Architecture Decision Records (ADRs).
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ This document is a canonical NexusAsset Cloud standard.     │
-│ Update it through pull request review and ADR linkage when  │
-│ architecture-impacting changes occur.                       │
-╰─────────────────────────────────────────────────────────────╯
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Validation                                            │
-└──────────────────────────────────────────────────────────┘
-
-| Check | Expected Result |
-|---|---|
-| Naming | Uses canonical NexusAsset Cloud names |
-| Security | Protects secrets, tenant boundaries, and access controls |
-| Quality | Passes lint, type, architecture, and test gates |
-| Traceability | Links to related docs, ADRs, and tests |
-
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                         │
-└──────────────────────────────────────────────────────────┘
-
-- [../01-analysis/08-bounded-contexts.md](../01-analysis/08-bounded-contexts.md)
-- [../03-implementation/01-project-structure.md](../03-implementation/01-project-structure.md)
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
-
+## Evidence Needed
+Complete OpenAPI spec, implementation parity, contract tests, and codegen outputs.

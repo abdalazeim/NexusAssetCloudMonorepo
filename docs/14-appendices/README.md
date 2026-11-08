@@ -1,48 +1,21 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 14-appendices/README.md                      │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 14-appendices                                │
-│  Version     : 1.0.0                                        │
-│  Status      : Stable                                       │
-│  Owner       : Platform Engineering                          │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Appendices, References, and Historical Material
 
-╔════════════════════════════════════════════════════════════════╗
-║  APPENDICES                                                    ║
-║  References, Glossary, and Archived Sources                    ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Contents](#2-contents)
-3. [Related Files](#3-related-files)
+## Status
+Expanded baseline. Appendix content must be clearly labeled authoritative or non-authoritative.
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-This module contains NexusAsset Cloud documentation for **references, glossary, and archived sources**.
+## Contents Guidance
+| File/type | Authority | Notes |
+|---|---|---|
+| Glossary/acronyms references | Supporting | Keep synchronized with `docs/00-overview/03-glossary.md` and canonical naming |
+| Legacy/fundamentals summaries | Non-authoritative historical context | Do not override NexusAsset Cloud specs |
+| Archived `deepseek_*` summaries | Non-authoritative traceability | Raw mixed-language drafts should not be restored as active specs |
+| Manifests/inventory | Supporting | Useful for provenance and cleanup tracking |
 
-┌──────────────────────────────────────────────────────────┐
-│  2. Contents                                             │
-└──────────────────────────────────────────────────────────┘
-| File | Description |
-|---|---|
-| [01-glossary.md](01-glossary.md) | Glossary |
-| [02-acronyms.md](02-acronyms.md) | Acronyms |
-| [03-references.md](03-references.md) | References and source materials |
-| [04-changelog.md](04-changelog.md) | Documentation changelog |
-| [05-contact.md](05-contact.md) | Contacts and ownership |
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [../README.md](../README.md)
-- [../00-overview/README.md](../00-overview/README.md)
-- [../03-implementation/README.md](../03-implementation/README.md)
-
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Rules
+- English-only maintained content.
+- No secrets.
+- Use canonical NexusAsset Cloud naming in maintained summaries.
+- Link to authoritative docs/prompts/project-meta/platform descriptors.

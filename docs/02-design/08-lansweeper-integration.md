@@ -1,97 +1,87 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 02-design/08-lansweeper-integration.md       │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 02-design                                    │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Architecture                                 │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Lansweeper Integration Design
 
-╔════════════════════════════════════════════════════════════════╗
-║  LANSWEEPER INTEGRATION                                        ║
-║  GraphQL, Webhooks, Delta, and Bulk Sync                       ║
-╚════════════════════════════════════════════════════════════════╝
-
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Scope](#2-scope)
-3. [Standard](#3-standard)
-4. [Implementation Guidance](#4-implementation-guidance)
-5. [Validation](#5-validation)
-6. [Related Files](#6-related-files)
-
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                               │
-└──────────────────────────────────────────────────────────┘
-
-Define the NexusAsset Cloud standard for graphql, webhooks, delta, and bulk sync.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Scope                                                 │
-└──────────────────────────────────────────────────────────┘
-
-This document applies to the NexusAsset Cloud monorepo, delivery pipelines, and runtime environments unless a more specific approved document states otherwise.
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Standard                                              │
-└──────────────────────────────────────────────────────────┘
-
-Use NexusAsset Cloud canonical naming: repository `nexusasset-cloud/`, Django package `backend/nexusasset/`, apps `nxa_*`, services `nxa-backend/nxa-frontend/nxa-worker/nxa-db/nxa-redis`, edge `nxa-traefik-public` and `nxa-le`, domains `app.nexusasset.cloud` and `api.nexusasset.cloud`, packages `@nexusasset/*`, and secrets `NXA_*`.
-
-Enforce Clean Architecture, tenant isolation (`tenant_id` + PostgreSQL RLS), idempotent integrations, and OpenAPI 3.1 as the contract source of truth.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Implementation Guidance                               │
-└──────────────────────────────────────────────────────────┘
-
-▸ Requirements
-- Use active, testable, and reviewable controls for lansweeper integration.
-- Align implementation with bounded contexts (`nxa_core`, `nxa_accounts`, `nxa_tenants`, `nxa_assets`, `nxa_lansweeper`, `nxa_billing`, `nxa_notifications`, `nxa_audit`).
-- Document exceptions through Architecture Decision Records (ADRs).
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ This document is a canonical NexusAsset Cloud standard.     │
-│ Update it through pull request review and ADR linkage when  │
-│ architecture-impacting changes occur.                       │
-╰─────────────────────────────────────────────────────────────╯
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Validation                                            │
-└──────────────────────────────────────────────────────────┘
-
-| Check | Expected Result |
+## Current State and Evidence
+| Field | Value |
 |---|---|
-| Naming | Uses canonical NexusAsset Cloud names |
-| Security | Protects secrets, tenant boundaries, and access controls |
-| Quality | Passes lint, type, architecture, and test gates |
-| Traceability | Links to related docs, ADRs, and tests |
+| Status | Expanded baseline (target design) |
+| Evidence level | Descriptor/design evidence; runtime integration Unverified |
+| Primary evidence | `platform/backend/apps/nxa_lansweeper/**` descriptors, `prompts/04-lansweeper-integration.md`, `docs/02-design/08-lansweeper-integration.md` (prior baseline), root/architecture docs |
 
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                         │
-└──────────────────────────────────────────────────────────┘
+## Purpose
+Define how NexusAsset Cloud integrates Lansweeper discovery data into tenant-scoped CMDB/ITAM records safely, idempotently, and observably.
 
-- [../01-analysis/08-bounded-contexts.md](../01-analysis/08-bounded-contexts.md)
-- [../03-implementation/01-project-structure.md](../03-implementation/01-project-structure.md)
+## Integration Objectives
+1. Ingest discovered IT/OT/cloud asset data into NexusAsset Cloud (`nxa_assets`/CMDB model target).
+2. Preserve data integrity using idempotency, validation, mapping, and Field Ownership Matrix rules.
+3. Prevent cross-tenant contamination; all sync operations run in explicit tenant context.
+4. Provide operational visibility: job status, counts, conflicts, errors, retries, and audit events.
+5. Handle Lansweeper API limits/failures with retries/backoff and safe recovery.
 
+## Integration Modes (Target)
+| Mode | Use case | Trigger | Status |
+|---|---|---|---|
+| Initial/bulk import | First-time tenant onboarding or rebuild | Manual/admin-triggered job (approved) | Target/Unverified |
+| Scheduled delta sync | Regular incremental updates | Celery Beat/worker schedule | Target/Unverified |
+| Webhook-driven update | Near-real-time change notification (if supported/configured) | Lansweeper webhook to verified endpoint | Target/Unverified |
+| Manual resync/reconciliation | Recovery or targeted correction | Admin/operator action with scope controls | Target/Unverified |
 
-┌──────────────────────────────────────────────────────────┐
-│  Adapted Source: 08_Data_Management/01_ETL_Pipelines_and_Data_Quality.txt│
-└──────────────────────────────────────────────────────────┘
-▸ Distributed from Fundamentals reference library (rewritten for NexusAsset Cloud)
-- ═══════════════════════════════════════════════════════════════════════════════
-- ETL Pipelines & Data Quality
-- ───────────────────────────────────────────────────────────────────────────────
-- ┌─────────────┬──────────────────────────────────────────────────────────┐
-- ├─────────────┼──────────────────────────────────────────────────────────┤
+## End-to-End Flow (Target)
+| Step | Component | Action | Controls |
+|---|---|---|---|
+| 1 | Config/auth | Load tenant integration config and `NXA_LANSWEEPER_*` secrets from approved store | No secrets in logs/repo |
+| 2 | Acquire data | Call Lansweeper GraphQL/API or receive verified webhook payload | Auth, TLS, timeout, rate-limit awareness |
+| 3 | Normalize | Map external payload to internal integration DTO/domain representation | Validation, schema/version handling |
+| 4 | Resolve identity | Match external asset identity to NexusAsset asset record | Deterministic keys, duplicate prevention |
+| 5 | Apply ownership rules | Evaluate Field Ownership Matrix before writes | Protect business-owned/manual fields |
+| 6 | Persist | Create/update/conflict via application use case and repository | Tenant scope, transactions, idempotency |
+| 7 | Audit/observe | Emit audit event, metrics, structured logs, job status | Correlation IDs, redaction |
+| 8 | Handle failure | Retry transient errors; quarantine/report permanent errors | Backoff, dead-letter/error status, operator visibility |
 
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ Apply these practices with NexusAsset Cloud standards:      │
-│ Clean Architecture, `nxa_*` contexts, OpenAPI 3.1,          │
-│ `tenant_id` + PostgreSQL RLS, and security quality gates.   │
-╰─────────────────────────────────────────────────────────────╯
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Field Ownership Matrix (Required Target Artifact)
+| Field category | Typical owner | Sync behavior | Status |
+|---|---|---|---|
+| Discovery facts (serial, hardware/network identifiers, discovered attributes) | Lansweeper/discovery | Upsert by approved mapping when confidence/rules allow | Target/Unverified |
+| Business/governance fields (owner, cost center, contract linkage, approval state) | NexusAsset business users/processes | Do not overwrite automatically; preserve or route to conflict workflow | Target/Unverified |
+| Reconciled fields | Policy-defined | Apply merge/conflict rules; record provenance | Target/Unverified |
+
+*A concrete matrix (field name → owner → source precedence → conflict action → audit requirement) must be created and tested during implementation.*
+
+## Idempotency and Conflict Handling
+| Concern | Target control |
+|---|---|
+| Duplicate webhook/event delivery | Dedupe key (event ID/hash/tenant+external ID+timestamp window as designed), safe reprocessing |
+| Retry after partial failure | Idempotent upsert and job checkpoint/cursor strategy |
+| Concurrent syncs | Tenant/scoped locking or optimistic concurrency strategy (design choice to verify) |
+| External/internal mismatch | Conflict record/status, operator review path, audit trail |
+| Unsafe overwrite | Field Ownership Matrix enforcement in application/domain policy |
+
+## Security Requirements
+- Lansweeper credentials and webhook secrets use `NXA_*` and secret stores.
+- Webhook endpoints verify authenticity before processing.
+- Tenant mapping is authoritative server-side configuration; do not accept tenant override from untrusted payload without verified mapping rules.
+- Payloads and logs are redacted for sensitive values.
+
+## Observability Requirements (Target)
+| Signal | Minimum expectation |
+|---|---|
+| Job status | queued/running/succeeded/failed/partial/conflict with timestamps |
+| Metrics | records fetched/created/updated/skipped/conflicted/failed, duration, retry count, API/rate-limit errors |
+| Logs | correlation/job/tenant IDs; no secrets; actionable error context |
+| Audit | sync started/completed, config changes, privileged manual resync, significant conflicts |
+
+## Failure Modes and Recovery
+| Failure | Expected behavior | Status |
+|---|---|---|
+| Lansweeper API unavailable/timeout | Retry transient failures with backoff; mark job degraded/failed per policy | Target/Unverified |
+| Rate limit exceeded | Respect limits, pause/backoff, reschedule | Target/Unverified |
+| Invalid payload/schema change | Validate, reject/quarantine bad records, alert, preserve job diagnostics | Target/Unverified |
+| Duplicate delivery | Dedupe/idempotent no-op or safe merge | Target/Unverified |
+| DB constraint/conflict | Controlled error handling; no partial tenant corruption; audit/report | Target/Unverified |
+
+## Related Files
+- `06-api-contract.md`
+- `09-multi-tenancy.md`
+- `../07-security/01-threat-model.md`
+- `../07-security/SECURITY_CONTROLS_MATRIX.md`
+- `../04-testing/README.md`
+- `../../prompts/04-lansweeper-integration.md`

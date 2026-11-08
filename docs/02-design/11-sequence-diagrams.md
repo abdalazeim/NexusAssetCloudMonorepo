@@ -1,95 +1,29 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 02-design/11-sequence-diagrams.md            │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 02-design                                    │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Architecture                                 │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Key Sequence Diagrams
 
-╔════════════════════════════════════════════════════════════════╗
-║  SEQUENCE DIAGRAMS                                             ║
-║  Critical System Flows                                         ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Scope](#2-scope)
-3. [Standard](#3-standard)
-4. [Implementation Guidance](#4-implementation-guidance)
-5. [Validation](#5-validation)
-6. [Related Files](#6-related-files)
+## Status
+Target documentation. Use ASCII/text diagrams (Mermaid deferred unless repository policy exception is approved).
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                               │
-└──────────────────────────────────────────────────────────┘
-
-Define the NexusAsset Cloud standard for critical system flows.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Scope                                                 │
-└──────────────────────────────────────────────────────────┘
-
-This document applies to the NexusAsset Cloud monorepo, delivery pipelines, and runtime environments unless a more specific approved document states otherwise.
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Standard                                              │
-└──────────────────────────────────────────────────────────┘
-
-Use NexusAsset Cloud canonical naming: repository `nexusasset-cloud/`, Django package `backend/nexusasset/`, apps `nxa_*`, services `nxa-backend/nxa-frontend/nxa-worker/nxa-db/nxa-redis`, edge `nxa-traefik-public` and `nxa-le`, domains `app.nexusasset.cloud` and `api.nexusasset.cloud`, packages `@nexusasset/*`, and secrets `NXA_*`.
-
-Enforce Clean Architecture, tenant isolation (`tenant_id` + PostgreSQL RLS), idempotent integrations, and OpenAPI 3.1 as the contract source of truth.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Implementation Guidance                               │
-└──────────────────────────────────────────────────────────┘
-
-▸ Requirements
-- Use active, testable, and reviewable controls for sequence diagrams.
-- Align implementation with bounded contexts (`nxa_core`, `nxa_accounts`, `nxa_tenants`, `nxa_assets`, `nxa_lansweeper`, `nxa_billing`, `nxa_notifications`, `nxa_audit`).
-- Document exceptions through Architecture Decision Records (ADRs).
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ This document is a canonical NexusAsset Cloud standard.     │
-│ Update it through pull request review and ADR linkage when  │
-│ architecture-impacting changes occur.                       │
-╰─────────────────────────────────────────────────────────────╯
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Validation                                            │
-└──────────────────────────────────────────────────────────┘
-
-| Check | Expected Result |
+## Required Flows to Document
+| Flow | Key checks |
 |---|---|
-| Naming | Uses canonical NexusAsset Cloud names |
-| Security | Protects secrets, tenant boundaries, and access controls |
-| Quality | Passes lint, type, architecture, and test gates |
-| Traceability | Links to related docs, ADRs, and tests |
+| User login/authenticated request | TLS, auth validation, tenant resolution, authorization, error handling |
+| BFF to backend API call | Session/token handling, contract mapping, timeout/retry behavior |
+| Asset list/detail query | Tenant filter, pagination, authorization, safe error response |
+| Lansweeper scheduled delta sync | Config/secrets, fetch, normalize, ownership/conflict, idempotent upsert, audit/metrics |
+| Lansweeper webhook | Verification, dedupe, tenant mapping, async processing, response semantics |
+| Sync failure/retry | Backoff, job status, operator visibility, no data corruption |
 
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                         │
-└──────────────────────────────────────────────────────────┘
+## Diagram Standard
+Each diagram must state actors/components, preconditions, main path, failure paths, and status (Target/Verified).
 
-- [../01-analysis/08-bounded-contexts.md](../01-analysis/08-bounded-contexts.md)
-- [../03-implementation/01-project-structure.md](../03-implementation/01-project-structure.md)
-
-
-┌──────────────────────────────────────────────────────────┐
-│  Adapted Source: 02_Architecture_and_Design/03_Data_Flows_and_Sequence_Diagrams.txt│
-└──────────────────────────────────────────────────────────┘
-▸ Distributed from Fundamentals reference library (rewritten for NexusAsset Cloud)
-- ═══════════════════════════════════════════════════════
-- ───────────────────────────────────────────────────────
-- │                       │                      │                      │
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ Apply these practices with NexusAsset Cloud standards:      │
-│ Clean Architecture, `nxa_*` contexts, OpenAPI 3.1,          │
-│ `tenant_id` + PostgreSQL RLS, and security quality gates.   │
-╰─────────────────────────────────────────────────────────────╯
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Example (Text Sequence — Target)
+User -> BFF: request asset list
+BFF -> API: authenticated request with server-resolved context
+API -> AuthZ/Tenant: validate principal and tenant scope
+API -> Application: query assets use case
+Application -> Repository: tenant-scoped query
+Repository -> PostgreSQL: filtered read (RLS defense-in-depth target)
+PostgreSQL -> Repository -> Application -> API -> BFF -> User: paginated result or safe error

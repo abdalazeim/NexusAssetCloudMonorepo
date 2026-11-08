@@ -1,72 +1,13 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 01-analysis/02-personas.md                   │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 01-analysis                                  │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Product                                      │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — User Personas and Goals
 
-╔════════════════════════════════════════════════════════════════╗
-║  PERSONAS                                                      ║
-║  Primary User Personas and Needs                               ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Persona Summary](#2-persona-summary)
-3. [Persona Needs](#3-persona-needs)
-4. [Design Implications](#4-design-implications)
-5. [Standards](#5-standards)
-6. [Related Files](#6-related-files)
+## Status
+Expanded baseline (Target/Unverified unless evidence exists).
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                               │
-└──────────────────────────────────────────────────────────┘
+## Purpose
+Define personas (e.g., IT admin, asset manager, auditor, finance/operator, mobile field user) with goals, pain points, access needs, and success criteria.
 
-Define primary NexusAsset Cloud personas to guide requirements, UX, and permissions.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Persona Summary                                       │
-└──────────────────────────────────────────────────────────┘
-
-| Persona | Goal | Key Pain | Key Modules |
-|---|---|---|---|
-| IT Operations Manager | Maintain accurate inventory | Stale/disconnected asset data | Dashboard, Assets, Discovery |
-| CMDB Administrator | Reconcile discovery and manual records | Field conflicts/duplicates | Assets, Lansweeper, Relationships |
-| Finance Manager | Control contracts and billing | Asset-cost visibility gaps | Billing, Contracts, Reports |
-| Compliance Officer | Prove control and traceability | Audit evidence fragmentation | Audit, Compliance, Reports |
-| Field Technician | Update/inspect assets on site | Connectivity and access limits | Mobile, Assets, Scan |
-| Integration Engineer | Operate reliable sync/API flows | Rate limits, schema drift | Developer, API, Lansweeper |
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Persona Needs                                         │
-└──────────────────────────────────────────────────────────┘
-
-Provide tenant-safe access, clear workflows, fast search, auditable changes, and reliable integrations.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Design Implications                                   │
-└──────────────────────────────────────────────────────────┘
-
-Use RBAC, BFF/web security, mobile bootstrap/offline sync, OpenAPI contracts, and observability for critical flows.
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Standards                                             │
-└──────────────────────────────────────────────────────────┘
-
-Use canonical NexusAsset Cloud naming (`nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`). Enforce Clean Architecture, tenant isolation (`tenant_id` + PostgreSQL RLS), and OpenAPI-first contracts.
-
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                         │
-└──────────────────────────────────────────────────────────┘
-
-- [./05-use-cases.md](./05-use-cases.md)
-- [../00-overview/04-navigation-map.md](../00-overview/04-navigation-map.md)
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
-
+## Required Details for Completion
+Add concrete NexusAsset Cloud examples, evidence references, edge/failure cases, security/tenant implications, and verification steps as implementation progresses.

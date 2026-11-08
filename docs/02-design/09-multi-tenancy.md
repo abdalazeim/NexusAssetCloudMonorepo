@@ -1,96 +1,63 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 02-design/09-multi-tenancy.md                │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 02-design                                    │
-│  Version     : 1.0.0                                         │
-│  Status      : Draft                                        │
-│  Owner       : Architecture                                 │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Multi-Tenancy Design
 
-╔════════════════════════════════════════════════════════════════╗
-║  MULTI-TENANCY                                                 ║
-║  Tenant Isolation with PostgreSQL RLS                          ║
-╚════════════════════════════════════════════════════════════════╝
-
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Scope](#2-scope)
-3. [Standard](#3-standard)
-4. [Implementation Guidance](#4-implementation-guidance)
-5. [Validation](#5-validation)
-6. [Related Files](#6-related-files)
-
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                               │
-└──────────────────────────────────────────────────────────┘
-
-Define the NexusAsset Cloud standard for tenant isolation with postgresql rls.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Scope                                                 │
-└──────────────────────────────────────────────────────────┘
-
-This document applies to the NexusAsset Cloud monorepo, delivery pipelines, and runtime environments unless a more specific approved document states otherwise.
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Standard                                              │
-└──────────────────────────────────────────────────────────┘
-
-Use NexusAsset Cloud canonical naming: repository `nexusasset-cloud/`, Django package `backend/nexusasset/`, apps `nxa_*`, services `nxa-backend/nxa-frontend/nxa-worker/nxa-db/nxa-redis`, edge `nxa-traefik-public` and `nxa-le`, domains `app.nexusasset.cloud` and `api.nexusasset.cloud`, packages `@nexusasset/*`, and secrets `NXA_*`.
-
-Enforce Clean Architecture, tenant isolation (`tenant_id` + PostgreSQL RLS), idempotent integrations, and OpenAPI 3.1 as the contract source of truth.
-
-┌──────────────────────────────────────────────────────────┐
-│  4. Implementation Guidance                               │
-└──────────────────────────────────────────────────────────┘
-
-▸ Requirements
-- Use active, testable, and reviewable controls for multi-tenancy.
-- Align implementation with bounded contexts (`nxa_core`, `nxa_accounts`, `nxa_tenants`, `nxa_assets`, `nxa_lansweeper`, `nxa_billing`, `nxa_notifications`, `nxa_audit`).
-- Document exceptions through Architecture Decision Records (ADRs).
-
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ This document is a canonical NexusAsset Cloud standard.     │
-│ Update it through pull request review and ADR linkage when  │
-│ architecture-impacting changes occur.                       │
-╰─────────────────────────────────────────────────────────────╯
-
-┌──────────────────────────────────────────────────────────┐
-│  5. Validation                                            │
-└──────────────────────────────────────────────────────────┘
-
-| Check | Expected Result |
+## Current State and Evidence
+| Field | Value |
 |---|---|
-| Naming | Uses canonical NexusAsset Cloud names |
-| Security | Protects secrets, tenant boundaries, and access controls |
-| Quality | Passes lint, type, architecture, and test gates |
-| Traceability | Links to related docs, ADRs, and tests |
+| Status | Expanded baseline (target design) |
+| Evidence level | Design/prompt evidence; RLS policies and runtime enforcement Unverified |
+| Primary evidence | `docs/02-design/09-multi-tenancy.md` (prior baseline), `docs/07-security/05-authorization.md`, `prompts/10-security-and-compliance.md`, `docs/01-analysis/08-bounded-contexts.md` |
 
-┌──────────────────────────────────────────────────────────┐
-│  6. Related Files                                         │
-└──────────────────────────────────────────────────────────┘
+## Purpose
+Define how NexusAsset Cloud isolates tenant data and operations across API, application, background jobs, integrations, and PostgreSQL.
 
-- [../01-analysis/08-bounded-contexts.md](../01-analysis/08-bounded-contexts.md)
-- [../03-implementation/01-project-structure.md](../03-implementation/01-project-structure.md)
+## Tenant Isolation Strategy (Target)
+NexusAsset Cloud uses a **logical multi-tenancy** model: shared platform/services with strict tenant scoping. Tenant-owned records include `tenant_id` (or equivalent enforced scope), application logic enforces authorization, and PostgreSQL RLS provides defense-in-depth where applicable.
 
+## Tenant Context Lifecycle (Target)
+| Stage | Requirement | Status |
+|---|---|---|
+| Authentication | Identify principal and allowed tenant memberships/claims source | Target/Unverified |
+| Tenant selection/resolution | Resolve effective tenant from trusted server-side rules (not arbitrary client override for authorization) | Target/Unverified |
+| Request propagation | Pass tenant context to BFF/API/use cases/data access explicitly | Target/Unverified |
+| Authorization | Verify principal can act on selected tenant/resource | Target/Unverified |
+| Data access | Apply tenant filters and/or DB session settings needed for RLS | Target/Unverified |
+| Async jobs | Store/restore validated tenant context; no global cross-tenant processing unless explicitly designed/admin-controlled | Target/Unverified |
+| Integrations/webhooks | Map external events to tenant using verified configuration; reject ambiguous mappings | Target/Unverified |
+| Audit | Record tenant-scoped sensitive actions | Target/Unverified |
 
-┌──────────────────────────────────────────────────────────┐
-│  Adapted Source: 09_Developer_Practices/03_Multi_Tenancy_and_Audit_Logs.txt│
-└──────────────────────────────────────────────────────────┘
-▸ Distributed from Fundamentals reference library (rewritten for NexusAsset Cloud)
-- ═══════════════════════════════════════════════════════
-- ───────────────────────────────────────────────────────
-- ┌──────────────────────┬──────────────┬──────────────┬──────────────┐
-- ├──────────────────────┼──────────────┼──────────────┼──────────────┤
+## Data Classification
+| Data type | Isolation rule |
+|---|---|
+| Tenant-owned business data (assets, billing records, tenant configs, tenant users/memberships as designed) | Must be tenant-scoped and protected by app + RLS target |
+| Global/reference data (if any) | Explicitly classified, read/write controlled, no tenant leakage through joins or caches |
+| Operational/control-plane data | Restricted administrative access, audited |
 
-╭─ NOTE ──────────────────────────────────────────────────────╮
-│ Apply these practices with NexusAsset Cloud standards:      │
-│ Clean Architecture, `nxa_*` contexts, OpenAPI 3.1,          │
-│ `tenant_id` + PostgreSQL RLS, and security quality gates.   │
-╰─────────────────────────────────────────────────────────────╯
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## PostgreSQL RLS (Target)
+| Requirement | Detail | Status |
+|---|---|---|
+| Policy design | RLS policies for tenant-owned tables based on trusted session/context mechanism | Target/Unverified |
+| Migration safety | Introduce RLS with rollout plan, superuser/admin considerations, and tests | Target/Unverified |
+| App integration | Application sets required session/context safely; no SQL injection path | Target/Unverified |
+| Exceptions | Any bypass (maintenance/admin jobs) is explicit, minimal, audited | Target/Unverified |
+
+## Critical Risks
+| Risk | Impact | Mitigation |
+|---|---|---|
+| Missing tenant filter in query/use case | Cross-tenant data exposure/modification | Mandatory tenant checks, code review, automated negative tests, RLS |
+| RLS misconfiguration or bypass | Defense-in-depth failure | Migration review, policy tests, privileged-role controls |
+| Background job without tenant context | Wrong-tenant writes or broad data access | Job contracts require tenant scope; validation and audit |
+| Cache/key collisions across tenants | Data leakage or stale cross-tenant responses | Tenant-aware cache keys/namespaces |
+| Webhook tenant mis-mapping | Wrong-tenant ingestion | Verified mapping config, signature verification, reject ambiguous events |
+
+## Verification Requirements
+- Negative API/integration tests: tenant A cannot access tenant B data.
+- Use-case/data-access tests for tenant scoping.
+- RLS policy tests (once implemented).
+- Job/webhook tests proving tenant context is required and validated.
+- Security review of admin/control-plane exceptions.
+
+## Related Files
+- `../07-security/05-authorization.md`
+- `../07-security/01-threat-model.md`
+- `08-lansweeper-integration.md`
+- `../04-testing/07-security-testing.md`

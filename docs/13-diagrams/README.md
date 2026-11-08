@@ -1,53 +1,21 @@
-┌──────────────────────────────────────────────────────────────┐
-│  File        : 13-diagrams/README.md                        │
-│  Project     : NexusAsset Cloud                              │
-│  Module      : 13-diagrams                                  │
-│  Version     : 1.0.0                                        │
-│  Status      : Stable                                       │
-│  Owner       : Platform Engineering                          │
-│  Last Update : 2026-11-08                                    │
-│  Language    : English                                       │
-└──────────────────────────────────────────────────────────────┘
+# NexusAsset Cloud — Architecture and Flow Diagrams
 
-╔════════════════════════════════════════════════════════════════╗
-║  DIAGRAMS                                                      ║
-║  ASCII and Text Architecture Diagrams                          ║
-╚════════════════════════════════════════════════════════════════╝
+## Current State and Evidence
+Status: Expanded baseline (Phase B/C). Evidence is Descriptor/Target/Planned unless verified by executable implementation, tests, scans, or runtime output.
 
-## Table of Contents
-1. [Purpose](#1-purpose)
-2. [Contents](#2-contents)
-3. [Related Files](#3-related-files)
+## Status
+Expanded baseline. Diagram policy: ASCII/text/specification diagrams by default (Mermaid deferred unless repository policy exception is approved).
 
-┌──────────────────────────────────────────────────────────┐
-│  1. Purpose                                              │
-└──────────────────────────────────────────────────────────┘
-This module contains NexusAsset Cloud documentation for **ascii and text architecture diagrams**.
-
-┌──────────────────────────────────────────────────────────┐
-│  2. Contents                                             │
-└──────────────────────────────────────────────────────────┘
-| File | Description |
-|---|---|
-| [system-context.txt](system-context.txt) | System context diagram |
-| [container-diagram.txt](container-diagram.txt) | Container diagram |
-| [component-diagram.txt](component-diagram.txt) | Component diagram |
-| [deployment-diagram.txt](deployment-diagram.txt) | Deployment diagram |
-| [data-flow.txt](data-flow.txt) | Data flow diagram |
-| [sequence-sync.txt](sequence-sync.txt) | Lansweeper sync sequence |
-| [sequence-auth.txt](sequence-auth.txt) | Authentication sequence |
-| [network-topology.txt](network-topology.txt) | Network topology |
-| [er-diagram.txt](er-diagram.txt) | Entity relationship diagram |
-| [folder-tree.txt](folder-tree.txt) | Canonical folder tree |
-
-┌──────────────────────────────────────────────────────────┐
-│  3. Related Files                                        │
-└──────────────────────────────────────────────────────────┘
-- [../README.md](../README.md)
-- [../00-overview/README.md](../00-overview/README.md)
-- [../03-implementation/README.md](../03-implementation/README.md)
-
-─────────────────────────────────────────────────────────────
-End of file — NexusAsset Cloud
-For questions: docs@nexusasset.cloud
-─────────────────────────────────────────────────────────────
+## Required Diagram Catalog (Target)
+| Diagram | Source docs | Status |
+|---|---|---|
+| System context | `docs/02-design/01-c4-context.md` | Target |
+| Container/runtime topology | `docs/02-design/02-c4-container.md` | Target |
+| Bounded-context components | `docs/02-design/03-c4-component.md` | Target |
+| Clean Architecture layers | `docs/02-design/04-clean-architecture.md` | Target |
+| Conceptual ERD/data ownership | `docs/02-design/05-data-model.md` | Target/Unverified schema |
+| Auth request lifecycle | `docs/07-security/04-authentication.md`, `docs/09-api/02-authentication.md` | Target |
+| Tenant isolation flow | `docs/02-design/09-multi-tenancy.md` | Target |
+| Lansweeper sync/webhook flow | `docs/02-design/08-lansweeper-integration.md` | Target |
+| CI/CD and deployment topology | `docs/05-deployment/*` | Target |
+| Incident/backup-recovery flow | `docs/06-operations/*` | Target |
