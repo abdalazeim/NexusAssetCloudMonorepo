@@ -57,6 +57,7 @@ The architecture is designed to support:
 
 The following directory tree represents the proposed target architecture for the NexusAsset Cloud monorepo.
 
+```text
 nexusasset-cloud/
 │
 ├── README.md
@@ -580,6 +581,7 @@ nexusasset-cloud/
     ├── legacy/
     ├── snapshots/
     └── archive-index.md
+```
 
 ---
 
