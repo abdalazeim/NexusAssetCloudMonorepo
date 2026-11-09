@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════
+#  NEXUSASSET CLOUD — ARCHIVED SOURCE RECORD
+# ═══════════════════════════════════════════════════════════════
+#  Archive ID         : ARC-SRC-002
+#  Original Filename  : deepseek_text_20261108_7ec359.txt
+#  Source Topic       : System Architecture (C4 Context)
+#  Normalized Target  : docs/02-design/01-c4-context.md
+#  Status             : Archived — Content distributed to target documentation
+#  Archived Date      : 2026-11-09
+#  Archived By        : Architecture Guild / Platform Engineering
+# ═══════════════════════════════════════════════════════════════
+
+# Archived Source Record: System Architecture (C4 Context)
+
+## Original Content Summary
+This source file contained raw system architecture material describing the C4 Context level — system boundaries, external actors, and trust boundaries for an enterprise asset management platform. The content was in mixed-language format and required normalization to NexusAsset Cloud documentation standards.
+
+## Distribution Mapping
+| Source Section | Target Document | Target Section |
+|---|---|---|
+| System Boundaries | `docs/02-design/01-c4-context.md` | §2 Context (Target) |
+| External Actors | `docs/02-design/01-c4-context.md` | §2.1 Actors & External Systems |
+| Trust Boundaries | `docs/02-design/01-c4-context.md` | §2.2 Trust Boundaries (ASCII) |
+| Integration Patterns | `docs/02-design/01-c4-context.md` | §2.3 Boundary Rules |
+
+## Normalization Applied
+- **Language**: Converted to English-only technical documentation
+- **Terminology**: Aligned to NexusAsset Cloud canonical naming (`nxa_*`, `nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`)
+- **Architecture**: Mapped to Clean Architecture, DDD, OpenAPI 3.1 first, `tenant_id` + PostgreSQL RLS, secure/idempotent integrations
+- **Structure**: Reformatted to NexusAsset Cloud documentation standard (header metadata, H1 banner, H2 boxed sections, ToC, ASCII diagrams, status markers)
+- **Diagrams**: Converted to ASCII/text format (Mermaid deferred per repository policy)
+
+## Verification
+- ✅ Source content reviewed and extracted
+- ✅ Useful guidance distributed to target documents
+- ✅ Target documents follow NexusAsset Cloud documentation standards
+- ✅ Cross-references in `docs/14-appendices/fundamentals-distribution-manifest.md` updated
+
+## Status
+**Archived** — This file serves as a traceability record only. All actionable content has been normalized and integrated into the authoritative NexusAsset Cloud documentation in `docs/`, `platform/`, `prompts/`, and `project-meta/`.
+
+---
+
+**End of file — NexusAsset Cloud / docs@nexusasset.cloud**

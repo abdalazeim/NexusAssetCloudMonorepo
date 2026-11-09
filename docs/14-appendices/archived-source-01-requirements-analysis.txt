@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════
+#  NEXUSASSET CLOUD — ARCHIVED SOURCE RECORD
+# ═══════════════════════════════════════════════════════════════
+#  Archive ID         : ARC-SRC-001
+#  Original Filename  : deepseek_text_20261108_145436.txt
+#  Source Topic       : Requirements Analysis (Non-Functional)
+#  Normalized Target  : docs/01-analysis/04-non-functional-requirements.md
+#  Status             : Archived — Content distributed to target documentation
+#  Archived Date      : 2026-11-09
+#  Archived By        : Architecture Guild / Platform Engineering
+# ═══════════════════════════════════════════════════════════════
+
+# Archived Source Record: Requirements Analysis (Non-Functional)
+
+## Original Content Summary
+This source file contained raw requirements analysis material focused on non-functional requirements for enterprise systems, including performance, scalability, security, reliability, and maintainability criteria. The content was in mixed-language format and required normalization to NexusAsset Cloud documentation standards.
+
+## Distribution Mapping
+| Source Section | Target Document | Target Section |
+|---|---|---|
+| Performance Requirements | `docs/01-analysis/04-non-functional-requirements.md` | §3 Performance & Scalability |
+| Scalability Requirements | `docs/01-analysis/04-non-functional-requirements.md` | §3 Performance & Scalability |
+| Security Requirements | `docs/01-analysis/04-non-functional-requirements.md` | §4 Security & Compliance |
+| Reliability/Availability | `docs/01-analysis/04-non-functional-requirements.md` | §5 Reliability & Availability |
+| Maintainability | `docs/01-analysis/04-non-functional-requirements.md` | §6 Maintainability & Operability |
+
+## Normalization Applied
+- **Language**: Converted to English-only technical documentation
+- **Terminology**: Aligned to NexusAsset Cloud canonical naming (`nxa_*`, `nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`)
+- **Architecture**: Mapped to Clean Architecture, DDD, OpenAPI 3.1 first, `tenant_id` + PostgreSQL RLS, secure/idempotent integrations
+- **Structure**: Reformatted to NexusAsset Cloud documentation standard (header metadata, H1 banner, H2 boxed sections, ToC, status markers)
+
+## Verification
+- ✅ Source content reviewed and extracted
+- ✅ Useful guidance distributed to target documents
+- ✅ Target documents follow NexusAsset Cloud documentation standards
+- ✅ Cross-references in `docs/14-appendices/fundamentals-distribution-manifest.md` updated
+
+## Status
+**Archived** — This file serves as a traceability record only. All actionable content has been normalized and integrated into the authoritative NexusAsset Cloud documentation in `docs/`, `platform/`, `prompts/`, and `project-meta/`.
+
+---
+
+**End of file — NexusAsset Cloud / docs@nexusasset.cloud**

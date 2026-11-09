@@ -1,0 +1,43 @@
+# ═══════════════════════════════════════════════════════════════
+#  NEXUSASSET CLOUD — ARCHIVED SOURCE RECORD
+# ═══════════════════════════════════════════════════════════════
+#  Archive ID         : ARC-SRC-005
+#  Original Filename  : deepseek_text_20261108_e5d4d4.txt
+#  Source Topic       : Code Documentation / Product Overview
+#  Normalized Target  : docs/00-overview/02-product-overview.md
+#  Status             : Archived — Content distributed to target documentation
+#  Archived Date      : 2026-11-09
+#  Archived By        : Architecture Guild / Platform Engineering
+# ═══════════════════════════════════════════════════════════════
+
+# Archived Source Record: Code Documentation / Product Overview
+
+## Original Content Summary
+This source file contained raw code documentation guidance and product overview material for enterprise platforms, including documentation standards, API documentation patterns, and product capability summaries. The content was in mixed-language format and required normalization to NexusAsset Cloud documentation standards.
+
+## Distribution Mapping
+| Source Section | Target Document | Target Section |
+|---|---|---|
+| Product Capabilities | `docs/00-overview/02-product-overview.md` | §2 Capabilities |
+| Documentation Standards | `docs/00-overview/02-product-overview.md` | §3 Documentation Approach |
+| API Documentation Patterns | `docs/09-api/README.md` | §API Documentation |
+| Architecture Documentation | `docs/02-design/README.md` | §Architecture Documentation |
+
+## Normalization Applied
+- **Language**: Converted to English-only technical documentation
+- **Terminology**: Aligned to NexusAsset Cloud canonical naming (`nxa_*`, `nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`)
+- **Architecture**: Mapped to Clean Architecture, DDD, OpenAPI 3.1 first, `tenant_id` + PostgreSQL RLS, secure/idempotent integrations
+- **Structure**: Reformatted to NexusAsset Cloud documentation standard (header metadata, H1 banner, H2 boxed sections, ToC, capability tables, status markers)
+
+## Verification
+- ✅ Source content reviewed and extracted
+- ✅ Useful guidance distributed to target documents
+- ✅ Target documents follow NexusAsset Cloud documentation standards
+- ✅ Cross-references in `docs/14-appendices/fundamentals-distribution-manifest.md` updated
+
+## Status
+**Archived** — This file serves as a traceability record only. All actionable content has been normalized and integrated into the authoritative NexusAsset Cloud documentation in `docs/`, `platform/`, `prompts/`, and `project-meta/`.
+
+---
+
+**End of file — NexusAsset Cloud / docs@nexusasset.cloud**

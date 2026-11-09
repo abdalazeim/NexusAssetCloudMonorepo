@@ -1,0 +1,44 @@
+# ═══════════════════════════════════════════════════════════════
+#  NEXUSASSET CLOUD — ARCHIVED SOURCE RECORD
+# ═══════════════════════════════════════════════════════════════
+#  Archive ID         : ARC-SRC-004
+#  Original Filename  : deepseek_text_20261108_95340e.txt
+#  Source Topic       : System Performance / Risk Register
+#  Normalized Target  : docs/01-analysis/10-risk-register.md
+#  Status             : Archived — Content distributed to target documentation
+#  Archived Date      : 2026-11-09
+#  Archived By        : Architecture Guild / Platform Engineering
+# ═══════════════════════════════════════════════════════════════
+
+# Archived Source Record: System Performance / Risk Register
+
+## Original Content Summary
+This source file contained raw system performance analysis and risk identification material for enterprise platforms, including performance bottlenecks, scalability risks, and mitigation strategies. The content was in mixed-language format and required normalization to NexusAsset Cloud documentation standards.
+
+## Distribution Mapping
+| Source Section | Target Document | Target Section |
+|---|---|---|
+| Performance Risks | `docs/01-analysis/10-risk-register.md` | §3 Technical Risks |
+| Scalability Risks | `docs/01-analysis/10-risk-register.md` | §3 Technical Risks |
+| Integration Risks (Lansweeper) | `docs/01-analysis/10-risk-register.md` | §4 Integration Risks |
+| Security Risks | `docs/01-analysis/10-risk-register.md` | §5 Security & Compliance Risks |
+| Operational Risks | `docs/01-analysis/10-risk-register.md` | §6 Operational Risks |
+
+## Normalization Applied
+- **Language**: Converted to English-only technical documentation
+- **Terminology**: Aligned to NexusAsset Cloud canonical naming (`nxa_*`, `nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`)
+- **Architecture**: Mapped to Clean Architecture, DDD, OpenAPI 3.1 first, `tenant_id` + PostgreSQL RLS, secure/idempotent integrations
+- **Structure**: Reformatted to NexusAsset Cloud documentation standard (header metadata, H1 banner, H2 boxed sections, ToC, risk tables with likelihood/impact/mitigation, status markers)
+
+## Verification
+- ✅ Source content reviewed and extracted
+- ✅ Useful guidance distributed to target documents
+- ✅ Target documents follow NexusAsset Cloud documentation standards
+- ✅ Cross-references in `docs/14-appendices/fundamentals-distribution-manifest.md` updated
+
+## Status
+**Archived** — This file serves as a traceability record only. All actionable content has been normalized and integrated into the authoritative NexusAsset Cloud documentation in `docs/`, `platform/`, `prompts/`, and `project-meta/`.
+
+---
+
+**End of file — NexusAsset Cloud / docs@nexusasset.cloud**

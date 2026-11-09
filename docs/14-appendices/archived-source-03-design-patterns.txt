@@ -1,0 +1,45 @@
+# ═══════════════════════════════════════════════════════════════
+#  NEXUSASSET CLOUD — ARCHIVED SOURCE RECORD
+# ═══════════════════════════════════════════════════════════════
+#  Archive ID         : ARC-SRC-003
+#  Original Filename  : deepseek_text_20261108_924687.txt
+#  Source Topic       : Design Patterns / Repository Guidance
+#  Normalized Target  : docs/03-implementation/07-repository-pattern.md
+#  Status             : Archived — Content distributed to target documentation
+#  Archived Date      : 2026-11-09
+#  Archived By        : Architecture Guild / Platform Engineering
+# ═══════════════════════════════════════════════════════════════
+
+# Archived Source Record: Design Patterns / Repository Guidance
+
+## Original Content Summary
+This source file contained raw design pattern guidance focused on the Repository pattern, data access abstraction, and persistence layer best practices for enterprise applications. The content was in mixed-language format and required normalization to NexusAsset Cloud documentation standards.
+
+## Distribution Mapping
+| Source Section | Target Document | Target Section |
+|---|---|---|
+| Repository Pattern Overview | `docs/03-implementation/07-repository-pattern.md` | §1 Purpose |
+| Interface Definition | `docs/03-implementation/07-repository-pattern.md` | §2 Interface Contract |
+| Implementation Strategies | `docs/03-implementation/07-repository-pattern.md` | §3 Implementation Patterns |
+| Testing Repositories | `docs/03-implementation/07-repository-pattern.md` | §4 Testing |
+| Clean Architecture Integration | `docs/03-implementation/07-repository-pattern.md` | §5 Architecture Integration |
+
+## Normalization Applied
+- **Language**: Converted to English-only technical documentation
+- **Terminology**: Aligned to NexusAsset Cloud canonical naming (`nxa_*`, `nxa-*`, `@nexusasset/*`, `NXA_*`, `*.nexusasset.cloud`)
+- **Architecture**: Mapped to Clean Architecture, DDD, OpenAPI 3.1 first, `tenant_id` + PostgreSQL RLS, secure/idempotent integrations
+- **Structure**: Reformatted to NexusAsset Cloud documentation standard (header metadata, H1 banner, H2 boxed sections, ToC, fenced code blocks, status markers)
+- **Code Examples**: Updated to reflect `nxa_*` bounded context structure and Django/DRF implementation patterns
+
+## Verification
+- ✅ Source content reviewed and extracted
+- ✅ Useful guidance distributed to target documents
+- ✅ Target documents follow NexusAsset Cloud documentation standards
+- ✅ Cross-references in `docs/14-appendices/fundamentals-distribution-manifest.md` updated
+
+## Status
+**Archived** — This file serves as a traceability record only. All actionable content has been normalized and integrated into the authoritative NexusAsset Cloud documentation in `docs/`, `platform/`, `prompts/`, and `project-meta/`.
+
+---
+
+**End of file — NexusAsset Cloud / docs@nexusasset.cloud**
