@@ -32,11 +32,11 @@ This file lists archived NexusAsset draft sources and records how the general `F
 └──────────────────────────────────────────────────────────┘
 | File | Source Type | Notes |
 |---|---|---|
-| [deepseek_text_20261108_95340e.txt](./deepseek_text_20261108_95340e.txt) | Draft | Short Arabic NexusAsset Cloud summary |
-| [deepseek_text_20261108_924687.txt](./deepseek_text_20261108_924687.txt) | Draft | Monorepo tree draft |
-| [deepseek_text_20261108_7ec359.txt](./deepseek_text_20261108_7ec359.txt) | Draft | Arabic functional/navigation summary |
-| [deepseek_text_20261108_145436.txt](./deepseek_text_20261108_145436.txt) | Draft | Functional specification (encoding artifacts in source) |
-| [deepseek_text_20261108_e5d4d4.txt](./deepseek_text_20261108_e5d4d4.txt) | Draft | Jenkins integration guide |
+| [archived-source-01-requirements-analysis.txt](./archived-source-01-requirements-analysis.txt) | Draft | Requirements analysis (non-functional) |
+| [archived-source-02-system-architecture.txt](./archived-source-02-system-architecture.txt) | Draft | System architecture (C4 context) |
+| [archived-source-03-design-patterns.txt](./archived-source-03-design-patterns.txt) | Draft | Design patterns / repository guidance |
+| [archived-source-04-performance-risk.txt](./archived-source-04-performance-risk.txt) | Draft | Performance analysis / risk register |
+| [archived-source-05-code-documentation.txt](./archived-source-05-code-documentation.txt) | Draft | Code documentation / product overview |
 | [legacy-fundamentals-reference.md](./legacy-fundamentals-reference.md) | Archived | Previous root README (non-NexusAsset identity) |
 
 ┌──────────────────────────────────────────────────────────┐

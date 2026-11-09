@@ -11,7 +11,7 @@ Expanded baseline. Appendix content must be clearly labeled authoritative or non
 |---|---|---|
 | Glossary/acronyms references | Supporting | Keep synchronized with `docs/00-overview/03-glossary.md` and canonical naming |
 | Legacy/fundamentals summaries | Non-authoritative historical context | Do not override NexusAsset Cloud specs |
-| Archived `deepseek_*` summaries | Non-authoritative traceability | Raw mixed-language drafts should not be restored as active specs |
+| Archived `archived-source-*` summaries | Non-authoritative traceability | Raw mixed-language drafts should not be restored as active specs |
 | Manifests/inventory | Supporting | Useful for provenance and cleanup tracking |
 
 ## Rules
